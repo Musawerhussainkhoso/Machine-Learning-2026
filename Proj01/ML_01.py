@@ -55,4 +55,10 @@ for col in num_col:
     sns.boxplot(x=df[col])
     plt.title(f'Boxplot of {col}')
     plt.show()
+
+#co-relation
+plt.figure(figsize=(10,8))
+sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Correlation Heatmap')
+plt.show()
     
