@@ -48,3 +48,11 @@ plt.title('Distribution of Smoker')
 plt.xlabel('Smoker')
 plt.ylabel('Count')
 plt.show()
+
+#now i will connect input and output variables then see the analysis, like what distribution is going on.
+for col in num_col:
+    plt.figure(figsize=(6,4))
+    sns.boxplot(x=df[col])
+    plt.title(f'Boxplot of {col}')
+    plt.show()
+    
