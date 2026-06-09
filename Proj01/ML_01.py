@@ -84,6 +84,11 @@ df.rename(columns={
     'smoker': 'is_smoker'
 }, inplace=True)
 print(df.head())
+#hot encoding
+df = pd.get_dummies(df, columns=['region'], drop_first=True)
+print(df.head())
+df=df.astype(int)
+print(df)
 
 
 
