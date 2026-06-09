@@ -26,6 +26,8 @@ num_col = [
     'children',
     'charges'
 ]# checking distributions
+
+
 for col in num_col:
     plt.figure(figsize=(6,4))# 6 to 4 will be pixel size of the graph
     sns.histplot(df[col], kde=True)#histogram use for continuous data and kde is for density plot
@@ -60,5 +62,14 @@ for col in num_col:
 plt.figure(figsize=(10,8))
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title('Correlation Heatmap')
+
 plt.show()
-    
+#Data Cleaning and Preprocessing
+print("Before:", df.shape)
+print("Duplicates:", df.duplicated().sum())
+df.drop_duplicates(inplace=True)
+print("After:", df.shape)
+df.isnull().sum()
+print(df.dtypes)
+df['sex'].value_counts()
+df['smoker'].value_counts()
