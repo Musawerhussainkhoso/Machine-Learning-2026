@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from scipy.stats import pearsonr , chi2_contingency
 
 
 warnings.filterwarnings('ignore')
@@ -103,5 +104,34 @@ cols = ['age', 'bmi', 'children']
 scaler = StandardScaler()
 df[cols]= scaler.fit_transform(df[cols])
 print(df.head())
+#Feature Extraction
+selected_features = ['age', 'is_female', 'bmi', 'children', 'is_smoker', 'charges',
+       'region_northwest', 'region_southeast', 'region_southwest',
+       'bmi_category']
+correlations = {
+    feature: pearsonr(df[feature], df['charges'])[0] 
+    for feature in selected_features
+}
+correlation_df = pd.DataFrame(list(correlations.items()), columns=['Feature', 'Correlation with Charges'])
+correlation_df = correlation_df.sort_values(by='Correlation with Charges', ascending=False)
+print(correlation_df)
 
+cat_features = ['age', 'is_female', 'bmi', 'children', 'is_smoker', 'charges',
+       'region_northwest', 'region_southeast', 'region_southwest',
+       'bmi_category']
+alpha = 0.05
+df['charges_bin'] = pd.qcut(df['charges'], q=4, labels=False)
+chi2_results = {}
+for col in cat_features:
+    contingency_table = pd.crosstab(df[col], df['charges_bin'])
+    chi2, p, _, _  = chi2_contingency(contingency_table)
+    decision = 'Reject Null Hypothesis' if p < alpha else 'Fail to Reject Null Hypothesis'
+    chi2_results[col] = {
+        'Chi2 Statistic': chi2,
+        'p-value': p,
+        'Decision': decision
+    }
+chi2_df = pd.DataFrame.from_dict(chi2_results, orient='index')
+print(chi2_df)
+    
 
