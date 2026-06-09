@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 warnings.filterwarnings('ignore')
@@ -96,5 +97,11 @@ print(df.head())
 df['bmi_category'] = df['bmi_category'].cat.codes
 df=df.astype(int)
 print(df)
+#Feature scaling
+print(df.columns)
+cols = ['age', 'bmi', 'children']
+scaler = StandardScaler()
+df[cols]= scaler.fit_transform(df[cols])
+print(df.head())
 
 
