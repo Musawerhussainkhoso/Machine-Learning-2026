@@ -78,4 +78,12 @@ df['sex']=df['sex'].map({'male': 0, 'female': 1})
 print(df.head())
 df['smoker']=df['smoker'].map({'no': 0, 'yes': 1})
 print(df.head())
+#rename some columns 
+df.rename(columns={
+    'sex': 'is_female',
+    'smoker': 'is_smoker'
+}, inplace=True)
+print(df.head())
+
+
 
