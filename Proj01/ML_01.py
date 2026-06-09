@@ -89,6 +89,12 @@ df = pd.get_dummies(df, columns=['region'], drop_first=True)
 print(df.head())
 df=df.astype(int)
 print(df)
-
+#feature engineering and extraction
+sns.histplot(df['bmi'])
+df['bmi_category'] = pd.cut(df['bmi'], bins=[0, 18.5, 24.9, 29.9, np.inf], labels=['Underweight', 'Normal', 'Overweight', 'Obese'])
+print(df.head())
+df['bmi_category'] = df['bmi_category'].cat.codes
+df=df.astype(int)
+print(df)
 
 
