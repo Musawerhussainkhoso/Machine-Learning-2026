@@ -71,5 +71,11 @@ df.drop_duplicates(inplace=True)
 print("After:", df.shape)
 df.isnull().sum()
 print(df.dtypes)
-df['sex'].value_counts()
-df['smoker'].value_counts()
+print(df['sex'].value_counts())
+print(df['smoker'].value_counts())
+#label encoding 
+df['sex']=df['sex'].map({'male': 0, 'female': 1})
+print(df.head())
+df['smoker']=df['smoker'].map({'no': 0, 'yes': 1})
+print(df.head())
+
