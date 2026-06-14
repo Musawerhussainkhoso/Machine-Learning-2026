@@ -47,3 +47,17 @@ restingbp_mean = df.loc[df_copy['RestingBP'] != 0, 'RestingBP'].mean()#loc means
 df_copy['RestingBP'] = df_copy['RestingBP'].replace(0, restingbp_mean)
 df_copy['RestingBP'] = df_copy['RestingBP'].round(2)
 print(df_copy['RestingBP'].value_counts())
+#again check the distribution of numerical columns after replacing the values
+def plotting(var, num):
+    plt.subplot(2, 2, num)
+    sns.histplot(df_copy[var], kde=True)
+
+plt.figure(figsize=(10, 8))
+
+plotting('Age', 1)
+plotting('RestingBP', 2)
+plotting('Cholesterol', 3)
+plotting('MaxHR', 4)
+
+plt.tight_layout()
+plt.show()
