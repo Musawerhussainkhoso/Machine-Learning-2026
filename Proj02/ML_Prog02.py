@@ -16,3 +16,29 @@ print(df_copy.shape)
 print(df_copy.info())
 print(df_copy.describe())
 print(df_copy.isnull().sum())
+print("Duplicate values in the dataset:")
+print(df_copy.duplicated().sum())
+#df['HeartDisease'].value_counts()
+print(df_copy['HeartDisease'].value_counts())
+#plot
+print(df_copy['HeartDisease'].value_counts().plot(kind='bar'))
+plt.show()
+#lets cretae numerical distribution and check the distributions of numericals are correct or not
+def plotting(var, num):
+    plt.subplot(2, 2, num)
+    sns.histplot(df_copy[var], kde=True)
+
+plt.figure(figsize=(10, 8))
+
+plotting('Age', 1)
+plotting('RestingBP', 2)
+plotting('Cholesterol', 3)
+plotting('MaxHR', 4)
+
+plt.tight_layout()
+plt.show()
+print(df_copy['Cholesterol'].value_counts())
+ch_mean = df.loc[df_copy['Cholesterol'] != 0, 'Cholesterol'].mean()#loc means targeting rows
+df_copy['Cholesterol'] = df_copy['Cholesterol'].replace(0, ch_mean)
+df_copy['Cholesterol'] = df_copy['Cholesterol'].round(2)
+print(df_copy['Cholesterol'].value_counts())
