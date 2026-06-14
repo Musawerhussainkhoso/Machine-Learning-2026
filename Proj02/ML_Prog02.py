@@ -42,3 +42,8 @@ ch_mean = df.loc[df_copy['Cholesterol'] != 0, 'Cholesterol'].mean()#loc means ta
 df_copy['Cholesterol'] = df_copy['Cholesterol'].replace(0, ch_mean)
 df_copy['Cholesterol'] = df_copy['Cholesterol'].round(2)
 print(df_copy['Cholesterol'].value_counts())
+#now for resting bp
+restingbp_mean = df.loc[df_copy['RestingBP'] != 0, 'RestingBP'].mean()#loc means targeting rows
+df_copy['RestingBP'] = df_copy['RestingBP'].replace(0, restingbp_mean)
+df_copy['RestingBP'] = df_copy['RestingBP'].round(2)
+print(df_copy['RestingBP'].value_counts())
