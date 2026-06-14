@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import StandardScaler
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -82,3 +83,8 @@ df_encode = pd.get_dummies(df_copy,drop_first=True)
 print(df_encode)
 df_encode.astype('int')
 print(df_encode.dtypes)
+#scaling values
+scaler = StandardScaler()
+num_cols = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
+df_encode[num_cols] = scaler.fit_transform(df_encode[num_cols])
+print(df_encode.head())
